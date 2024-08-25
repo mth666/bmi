@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:bmi/custom_icon_widget.dart';
+import 'custom_card.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -12,63 +15,93 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI CALCULATOR'),
+        title: const Center(
+          child: Text('BMI CALCULATOR'),
+        ),
       ),
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  // MALE Icon Container box
+                  child: MyContainer(
+                    customCard: CustomIconContent(
+                      icon: FontAwesomeIcons.mars,
+                      label: 'MALE',
+                    ),
+                    mycolor: Color(0xFF1D1E33),
+                  ),
+                ),
+                // FEMALE Icon Container box
+                Expanded(
+                  child: MyContainer(
+                    customCard: CustomIconContent(
+                      icon: FontAwesomeIcons.venus,
+                      label: 'FEMALE',
+                    ),
+                    mycolor: Color(0xFF1D1E33),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Middle part of the apps page
+          const Expanded(
+            child: MyContainer(
+              customCard: Column(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.mars,
+                    size: 69,
+                  ),
+                ],
+              ),
+              mycolor: Color(0xFF1D1E33),
+            ),
+          ),
+
+          const Expanded(
             child: Row(
               children: [
                 Expanded(
                   child: MyContainer(
+                    customCard: Column(
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.mars,
+                          size: 69,
+                        ),
+                      ],
+                    ),
                     mycolor: Color(0xFF1D1E33),
                   ),
                 ),
                 Expanded(
                   child: MyContainer(
-                    mycolor: Color(0xFF1D1E44),
+                    customCard: Column(
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.mars,
+                          size: 69,
+                        ),
+                      ],
+                    ),
+                    mycolor: Color(0xFF1D1E33),
                   ),
                 ),
               ],
             ),
           ),
-          Expanded(
-            child: MyContainer(
-              mycolor: Color(0xFF1D1E55),
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: MyContainer(
-                    mycolor: Color(0xFF1D1E66),
-                  ),
-                ),
-                Expanded(
-                  child: MyContainer(
-                    mycolor: Color(0xFF1D1E77),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          //Bottom Button-ish red nav bar
+          Container(
+            color: const Color(0xFFEB1555),
+            width: double.infinity,
+            height: 88,
+            margin: const EdgeInsets.only(top: 10),
+          )
         ],
-      ),
-    );
-  }
-}
-
-class MyContainer extends StatelessWidget {
-  MyContainer({required this.mycolor});
-  final Color mycolor;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: mycolor, // Color need to be in Box Decoration widget
-        borderRadius: BorderRadius.circular(15),
       ),
     );
   }
