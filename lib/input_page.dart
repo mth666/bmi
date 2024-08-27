@@ -4,6 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi/custom_icon_widget.dart';
 import 'custom_card.dart';
 
+const inactiveColor = Color(0xFF111328);
+const activeColor = Color(0xFF1D1E33);
+
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
 
@@ -12,6 +15,30 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor = inactiveColor;
+  Color femaleCardColor = inactiveColor;
+  //Manipulate active or inactive colors on press or not
+  void colorChanger(int gender) {
+    //MALE card pressed color changer
+    if (gender == 1) {
+      if (maleCardColor == inactiveColor) {
+        maleCardColor = activeColor;
+        femaleCardColor = inactiveColor;
+      } else {
+        maleCardColor = inactiveColor;
+      }
+    }
+    //MALE card pressed color changer
+    if (gender == 2) {
+      if (femaleCardColor == inactiveColor) {
+        femaleCardColor = activeColor;
+        maleCardColor = inactiveColor;
+      } else {
+        femaleCardColor = inactiveColor;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,24 +55,40 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   // MALE Icon Container box
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      setState(
+                        () {
+                          colorChanger(1);
+                        },
+                      );
+                    },
                     child: MyContainer(
-                      customCard: CustomIconContent(
+                      customCard: const CustomIconContent(
                         icon: FontAwesomeIcons.mars,
                         label: 'MALE',
                       ),
-                      mycolor: Color(0xFF1D1E33),
+                      mycolor: maleCardColor,
                     ),
                   ),
                 ),
                 // FEMALE Icon Container box
                 Expanded(
-                  child: MyContainer(
-                    customCard: CustomIconContent(
-                      icon: FontAwesomeIcons.venus,
-                      label: 'FEMALE',
+                  // FEMALE Icon Container box
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(
+                        () {
+                          colorChanger(2);
+                        },
+                      );
+                    },
+                    child: MyContainer(
+                      customCard: const CustomIconContent(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
+                      ),
+                      mycolor: femaleCardColor,
                     ),
-                    mycolor: Color(0xFF1D1E33),
                   ),
                 ),
               ],
@@ -62,7 +105,7 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ],
               ),
-              mycolor: Color(0xFF1D1E33),
+              mycolor: activeColor,
             ),
           ),
 
@@ -79,7 +122,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ],
                     ),
-                    mycolor: Color(0xFF1D1E33),
+                    mycolor: activeColor,
                   ),
                 ),
                 Expanded(
@@ -92,7 +135,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ],
                     ),
-                    mycolor: Color(0xFF1D1E33),
+                    mycolor: activeColor,
                   ),
                 ),
               ],
