@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi/custom_icon_widget.dart';
@@ -21,17 +22,20 @@ class _InputPageState extends State<InputPage> {
       ),
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
             child: Row(
               children: [
                 Expanded(
                   // MALE Icon Container box
-                  child: MyContainer(
-                    customCard: CustomIconContent(
-                      icon: FontAwesomeIcons.mars,
-                      label: 'MALE',
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: MyContainer(
+                      customCard: CustomIconContent(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MALE',
+                      ),
+                      mycolor: Color(0xFF1D1E33),
                     ),
-                    mycolor: Color(0xFF1D1E33),
                   ),
                 ),
                 // FEMALE Icon Container box
