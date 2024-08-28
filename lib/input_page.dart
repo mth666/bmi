@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi/custom_icon_widget.dart';
 import 'custom_card.dart';
-
-const inactiveColor = Color(0xFF111328);
-const activeColor = Color(0xFF1D1E33);
+import 'constants_stuffs.dart';
 
 enum Gender {
   male,
@@ -76,8 +75,8 @@ class _InputPageState extends State<InputPage> {
                         label: 'MALE',
                       ),
                       mycolor: currentActive == Gender.male //Ternary
-                          ? activeColor
-                          : inactiveColor,
+                          ? kActiveColor
+                          : kInactiveColor,
                     ),
                   ),
                 ),
@@ -98,8 +97,8 @@ class _InputPageState extends State<InputPage> {
                         label: 'FEMALE',
                       ),
                       mycolor: currentActive == Gender.female //Ternary
-                          ? activeColor
-                          : inactiveColor,
+                          ? kActiveColor
+                          : kInactiveColor,
                     ),
                   ),
                 ),
@@ -111,13 +110,13 @@ class _InputPageState extends State<InputPage> {
             child: MyContainer(
               customCard: Column(
                 children: [
-                  Icon(
-                    FontAwesomeIcons.mars,
-                    size: 69,
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
                   ),
                 ],
               ),
-              mycolor: activeColor,
+              mycolor: kActiveColor,
             ),
           ),
 
@@ -134,7 +133,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ],
                     ),
-                    mycolor: activeColor,
+                    mycolor: kActiveColor,
                   ),
                 ),
                 Expanded(
@@ -147,7 +146,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ],
                     ),
-                    mycolor: activeColor,
+                    mycolor: kActiveColor,
                   ),
                 ),
               ],
