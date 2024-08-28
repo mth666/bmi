@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi/custom_icon_widget.dart';
 import 'custom_card.dart';
@@ -21,6 +20,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender currentActive = Gender.others;
+  int humanheight = 180;
   // Color maleCardColor = inactiveColor;
   // Color femaleCardColor = inactiveColor;
   // //Manipulate active or inactive colors on press or not
@@ -106,13 +106,41 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           // Middle part of the apps page
-          const Expanded(
+          Expanded(
             child: MyContainer(
               customCard: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'HEIGHT',
                     style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        humanheight.toString(),
+                        style: kLabelStyleTwo,
+                      ),
+                      const Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      )
+                    ],
+                  ),
+                  Slider(
+                    value: humanheight.toDouble(),
+                    min: 120.0,
+                    max: 220.0,
+                    activeColor: Color(0xFFEB1555),
+                    inactiveColor: Color(0xFF8D8E98),
+                    onChanged: (double value) {
+                      setState(() {
+                        humanheight = value.round();
+                      });
+                    },
                   ),
                 ],
               ),
