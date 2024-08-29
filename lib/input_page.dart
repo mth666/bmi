@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi/custom_icon_widget.dart';
 import 'custom_card.dart';
@@ -21,6 +20,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender currentActive = Gender.others;
   int humanheight = 180;
+  int humanweight = 50;
+  int humanage = 20;
   // Color maleCardColor = inactiveColor;
   // Color femaleCardColor = inactiveColor;
   // //Manipulate active or inactive colors on press or not
@@ -56,6 +57,7 @@ class _InputPageState extends State<InputPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          //MALE ICON and Text
           Expanded(
             child: Row(
               children: [
@@ -105,7 +107,7 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          // Middle part of the apps page
+          // Middle part of the apps page HEIGHT
           Expanded(
             child: MyContainer(
               customCard: Column(
@@ -130,55 +132,128 @@ class _InputPageState extends State<InputPage> {
                       )
                     ],
                   ),
-                  Slider(
-                    value: humanheight.toDouble(),
-                    min: 120.0,
-                    max: 220.0,
-                    activeColor: Color(0xFFEB1555),
-                    inactiveColor: Color(0xFF8D8E98),
-                    onChanged: (double value) {
-                      setState(() {
-                        humanheight = value.round();
-                      });
-                    },
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      thumbShape:
+                          const RoundSliderThumbShape(enabledThumbRadius: 10),
+                      overlayShape:
+                          const RoundSliderOverlayShape(overlayRadius: 20),
+                    ),
+                    child: Slider(
+                      value: humanheight.toDouble(),
+                      min: 120.0,
+                      max: 220.0,
+                      activeColor: const Color(0xFFEB1555),
+                      inactiveColor: const Color(0xFF8D8E98),
+                      onChanged: (double value666) {
+                        setState(() {
+                          humanheight = value666.round();
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
               mycolor: kActiveColor,
             ),
           ),
-
-          const Expanded(
+          //Weight Card Tile
+          Expanded(
             child: Row(
               children: [
                 Expanded(
                   child: MyContainer(
                     customCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          FontAwesomeIcons.mars,
-                          size: 69,
+                        const Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
                         ),
+                        Text(
+                          humanweight.toString(),
+                          style: kLabelStyleTwo,
+                        ),
+                        Row(
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyCustomButton(
+                              my_icon: FontAwesomeIcons.minus,
+                              onPrezz: () {
+                                setState(() {
+                                  humanweight--;
+                                  //print('minus got pressed');
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 14,
+                            ),
+                            MyCustomButton(
+                              my_icon: FontAwesomeIcons.plus,
+                              onPrezz: () {
+                                setState(() {
+                                  humanweight++;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                        // Text('kg'),
                       ],
-                    ),
+                    ), // WEIGHT Widget End
                     mycolor: kActiveColor,
                   ),
                 ),
+                // Age Widget Start
                 Expanded(
                   child: MyContainer(
                     customCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          FontAwesomeIcons.mars,
-                          size: 69,
+                        const Text(
+                          'AGE',
+                          style: kLabelTextStyle,
                         ),
+                        Text(
+                          humanage.toString(),
+                          style: kLabelStyleTwo,
+                        ),
+                        Row(
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyCustomButton(
+                              my_icon: FontAwesomeIcons.minus,
+                              onPrezz: () {
+                                setState(() {
+                                  humanage--;
+                                  //print('minus got pressed');
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 14,
+                            ),
+                            MyCustomButton(
+                              my_icon: FontAwesomeIcons.plus,
+                              onPrezz: () {
+                                setState(() {
+                                  humanage++;
+                                });
+                              },
+                            ),
+                          ], //
+                        )
+                        // Text('kg'),
                       ],
                     ),
                     mycolor: kActiveColor,
                   ),
                 ),
               ],
-            ),
+            ), // Age widget container End here
           ),
           //Bottom Button-ish red nav bar
           Container(
@@ -189,6 +264,31 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
+    );
+  }
+}
+
+class MyCustomButton extends StatelessWidget {
+  const MyCustomButton(
+      {super.key, required this.my_icon, required this.onPrezz});
+  final IconData my_icon;
+  final Function onPrezz;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      elevation: 1,
+      constraints: const BoxConstraints.tightFor(
+        width: 56,
+        height: 56,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      fillColor: const Color(0xFF4C4F5E),
+      onPressed: () {
+        onPrezz();
+      },
+      child: Icon(my_icon),
     );
   }
 }
