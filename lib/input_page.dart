@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi/custom_icon_widget.dart';
 import 'custom_card.dart';
 import 'constants_stuffs.dart';
+import 'results.dart';
+import 'bmi_logic.dart';
 
 enum Gender {
   male,
@@ -256,12 +258,35 @@ class _InputPageState extends State<InputPage> {
             ), // Age widget container End here
           ),
           //Bottom Button-ish red nav bar
-          Container(
-            color: const Color(0xFFEB1555),
-            width: double.infinity,
-            height: 88,
-            margin: const EdgeInsets.only(top: 10),
-          )
+          GestureDetector(
+            onTap: () {
+              ResultLogic r = ResultLogic(
+                  humanweight: humanweight, humanheight: humanheight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ResultsPage(
+                    bmiResult: '',
+                    resulTexts: '',
+                    realTalk: '',
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              color: const Color(0xFFEB1555),
+              width: double.infinity,
+              height: 88,
+              margin: const EdgeInsets.only(top: 12),
+              padding: const EdgeInsets.only(bottom: 12),
+              child: const Center(
+                child: Text(
+                  'CALCULATE',
+                  style: kBigButton,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

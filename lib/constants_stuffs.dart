@@ -13,3 +13,7 @@ const kLabelStyleTwo = TextStyle(
 
 const kInactiveColor = Color(0xFF111328);
 const kActiveColor = Color(0xFF1D1E33);
+const kBigButton = TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+);
