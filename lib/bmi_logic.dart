@@ -1,7 +1,8 @@
 import 'dart:math';
 
-class ResultLogic {
-  ResultLogic({
+class BmiLogic {
+  //construtors
+  BmiLogic({
     required this.humanweight,
     required this.humanheight,
   });
@@ -12,13 +13,13 @@ class ResultLogic {
 
   late double _bmi; // private value
 //method to calculate BMI results. give me BMI
-  String logicBMI() {
+  String bmiResult() {
     double bmi = humanweight / pow(humanheight / 100, 2);
     return bmi.toStringAsFixed(1);
   }
 
   //method to get results of BMI. Based on logicBMI data.
-  String resultsBMI() {
+  String bmiText() {
     if (_bmi >= 25) {
       return 'OVER WEIGHT!';
     } else if (_bmi > 18.5) {
@@ -29,7 +30,7 @@ class ResultLogic {
   }
 
 //method to tell what does those mean
-  String realTalk() {
+  String bmiTextDetail() {
     if (_bmi >= 25) {
       return 'Exercise More!';
     } else if (_bmi > 18.5) {

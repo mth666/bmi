@@ -5,6 +5,8 @@ import 'custom_card.dart';
 import 'constants_stuffs.dart';
 import 'results.dart';
 import 'bmi_logic.dart';
+import 'bottomButton.dart';
+import 'square_button.dart';
 
 enum Gender {
   male,
@@ -258,62 +260,80 @@ class _InputPageState extends State<InputPage> {
             ), // Age widget container End here
           ),
           //Bottom Button-ish red nav bar
-          GestureDetector(
+          CalculateButton(
+            //humanweight: humanweight,
+            //humanheight: humanheight,
             onTap: () {
-              ResultLogic r = ResultLogic(
-                  humanweight: humanweight, humanheight: humanheight);
+              BmiLogic bLogic =
+                  BmiLogic(humanweight: humanweight, humanheight: humanheight);
+              //rLogic.calculateBMI();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ResultsPage(
-                    bmiResult: '',
-                    resulTexts: '',
-                    realTalk: '',
+                  builder: (context) => ResultsPage(
+                    bmiResult: bLogic.bmiResult(),
+                    bmiText: bLogic.bmiText(),
+                    bmiTextDetail: bLogic.bmiTextDetail(),
                   ),
                 ),
               );
-            },
-            child: Container(
-              color: const Color(0xFFEB1555),
-              width: double.infinity,
-              height: 88,
-              margin: const EdgeInsets.only(top: 12),
-              padding: const EdgeInsets.only(bottom: 12),
-              child: const Center(
-                child: Text(
-                  'CALCULATE',
-                  style: kBigButton,
-                ),
-              ),
-            ),
+            }, //onTap
+            buttonTitle: 'CALCULATE',
           ),
         ],
       ),
     );
   }
 }
+//
+// class CalculateButton extends StatelessWidget {
+//   final Function onTap;
+//   final String buttonTitle;
+//
+//   const CalculateButton({
+//     super.key,
+//     // required this.humanweight,
+//     //required this.humanheight,
+//     required this.onTap,
+//     required this.buttonTitle,
+//   });
+//
+//   // final int humanweight;
+//   //final int humanheight;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       // () {
+//       // ResultLogic r =
+//       //     ResultLogic(humanweight: humanweight, humanheight: humanheight);
+//       // Navigator.push(
+//       //   context,
+//       //   MaterialPageRoute(
+//       //     builder: (context) => const ResultsPage(
+//       //       bmiResult: '',
+//       //       resulTexts: '',
+//       //       realTalk: '',
+//       //     ),
+//       //   ),
+//       // );
+//       // },
+//       child: Container(
+//         color: const Color(0xFFEB1555),
+//         width: double.infinity,
+//         height: 88,
+//         margin: const EdgeInsets.only(top: 12),
+//         padding: const EdgeInsets.only(bottom: 12),
+//         child: const Center(
+//           child: Text(
+//             buttonTitle,
+//             style: kBigButton,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class MyCustomButton extends StatelessWidget {
-  const MyCustomButton(
-      {super.key, required this.my_icon, required this.onPrezz});
-  final IconData my_icon;
-  final Function onPrezz;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      elevation: 1,
-      constraints: const BoxConstraints.tightFor(
-        width: 56,
-        height: 56,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      fillColor: const Color(0xFF4C4F5E),
-      onPressed: () {
-        onPrezz();
-      },
-      child: Icon(my_icon),
-    );
-  }
-}
+//Button
